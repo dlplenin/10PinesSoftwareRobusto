@@ -22,6 +22,9 @@ namespace Practicas.MisLibros
 
         public void AddWithQuantity(object book, int quantity)
         {
+            if (quantity <= 0)
+                throw new InvalidOperationException("Cantidad debe ser mayor a 0");
+                
             if (!Catalog.Contains(book))
                 throw new InvalidOperationException("El libro no está en el catálogo");
 

@@ -77,7 +77,7 @@ namespace Practivas.test.MisLibros
             var cart = EmptyCart();
             var book = NotInCatalogBook();
 
-            var excepcion = Assert.Throws<InvalidOperationException>(() => cart.Add(book));
+            var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 1));
             Assert.Equal("El libro no está en el catálogo", excepcion.Message);
         }
 
