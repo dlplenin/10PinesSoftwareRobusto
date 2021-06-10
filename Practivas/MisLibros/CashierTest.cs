@@ -3,7 +3,7 @@ using Practicas.MisLibros;
 using System.Collections.Generic;
 using System;
 
-namespace Practivas.MisLibros
+namespace Practivas.test.MisLibros
 {
     public class CashierTest
     {
