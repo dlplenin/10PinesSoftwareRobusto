@@ -8,6 +8,9 @@ namespace Practivas.test.MisLibros
 {
     public class ShoppingTest
     {
+        private const string BOOK_NOT_IN_CATALOG = "El libro no está en el catálogo";
+        private const string QUANTITY_MUST_GT_ZERO = "Cantidad debe ser mayor a 0";
+
         private List<object> Catalog()
         {
             return new List<object>() { ValidBook(), AnotherValidBook() };
@@ -78,17 +81,17 @@ namespace Practivas.test.MisLibros
             var book = NotInCatalogBook();
 
             var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 1));
-            Assert.Equal("El libro no está en el catálogo", excepcion.Message);
+            Assert.Equal(BOOK_NOT_IN_CATALOG, excepcion.Message);
         }
 
         [Fact]
-        public void DebeAgregarCantidadesMayoresACero()
+        public void DebeAgregarSoloCantidadesMayoresaCero()
         {
             var cart = EmptyCart();
             var book = ValidBook();
 
             var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 0));
-            Assert.Equal("Solo cantidades > 0", excepcion.Message);
+            Assert.Equal(QUANTITY_MUST_GT_ZERO, excepcion.Message);
         }
 
         private object NotInCatalogBook()

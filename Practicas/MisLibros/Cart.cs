@@ -22,14 +22,24 @@ namespace Practicas.MisLibros
 
         public void AddWithQuantity(object book, int quantity)
         {
-            if (quantity <= 0)
-                throw new InvalidOperationException("Cantidad debe ser mayor a 0");
-                
-            if (!Catalog.Contains(book))
-                throw new InvalidOperationException("El libro no está en el catálogo");
+            AssertValidQuantity(quantity);
+
+            AssertValidInCatalog(book);
 
             for (int i = 0; i < quantity; i++)
                 Items.Add(book);
+        }
+
+        private void AssertValidInCatalog(object book)
+        {
+            if (!Catalog.Contains(book))
+                throw new InvalidOperationException("El libro no está en el catálogo");
+        }
+
+        private static void AssertValidQuantity(int quantity)
+        {
+            if (quantity <= 0)
+                throw new InvalidOperationException("Cantidad debe ser mayor a 0");
         }
 
         public bool IsEmpty()
