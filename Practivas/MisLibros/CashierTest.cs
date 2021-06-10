@@ -13,14 +13,18 @@ namespace Practivas.test.MisLibros
         public void CarroVacioNoPuedeHacerCheckout()
         {
             //Given
-            Cart cart = new Cart(new List<object>());
-            
+
             //When
-            Cashier cashier = new Cashier(cart);
-            
+
             //Then
-            var excepcion = Assert.Throws<InvalidOperationException>(() => cashier.Checkout());
+            var excepcion = Assert.Throws<InvalidOperationException>(() => CashierWithEmpotyCart());
             Assert.Equal(CART_MUST_NOT_BE_EMPTY, excepcion.Message);
+        }
+
+        private static Cashier CashierWithEmpotyCart()
+        {
+            Cart cart = new Cart(new List<object>());
+            return new Cashier(cart);
         }
     }
 }
