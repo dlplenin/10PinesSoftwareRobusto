@@ -72,6 +72,7 @@ namespace Practivas.test.MisLibros
 
             Assert.Equal(1, cart.HowManyOf(anotherBook));
             Assert.Equal(3, cart.HowManyOf(book));
+            Assert.Equal(4, cart.Count());
         }
 
         [Fact]

@@ -56,5 +56,10 @@ namespace Practicas.MisLibros
         {
             return Items.Count(x => x.Equals(book));
         }
+
+        public int Count()
+        {
+            return Items.Count;
+        }
     }
 }
