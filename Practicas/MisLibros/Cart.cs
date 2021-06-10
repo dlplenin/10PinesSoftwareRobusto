@@ -26,7 +26,7 @@ namespace Practicas.MisLibros
                 throw new InvalidOperationException("El libro no está en el catálogo");
 
             for (int i = 0; i < quantity; i++)
-                Add(book);
+                Items.Add(book);
         }
 
         public bool IsEmpty()

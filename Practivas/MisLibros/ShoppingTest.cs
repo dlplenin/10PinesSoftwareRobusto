@@ -81,6 +81,16 @@ namespace Practivas.test.MisLibros
             Assert.Equal("El libro no está en el catálogo", excepcion.Message);
         }
 
+        [Fact]
+        public void DebeAgregarCantidadesMayoresACero()
+        {
+            var cart = EmptyCart();
+            var book = ValidBook();
+
+            var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 0));
+            Assert.Equal("Solo cantidades > 0", excepcion.Message);
+        }
+
         private object NotInCatalogBook()
         {
             return "Fuera de catálogo";
