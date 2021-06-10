@@ -7,16 +7,41 @@ namespace Practicas.MisLibros
 {
     public class Cart
     {
-        private List<Book> Items { get; set; } = new List<Book>();
+        private List<object> Items { get; set; } = new List<object>();
+        private readonly List<object> Catalog;
 
-        public void AddBook(Book libro)
+        public Cart(List<object> catalog)
         {
-            Items.Add(libro);
+            Catalog = catalog;
         }
 
-        public int GetItemsCount()
+        public void Add(object book)
         {
-            return Items.Count;
+            AddWithQuantity(book, 1);
+        }
+
+        public void AddWithQuantity(object book, int quantity)
+        {
+            if (!Catalog.Contains(book))
+                throw new InvalidOperationException("El libro no está en el catálogo");
+
+            for (int i = 0; i < quantity; i++)
+                Add(book);
+        }
+
+        public bool IsEmpty()
+        {
+            return !Items.Any();
+        }
+
+        public bool Contains(object book)
+        {
+            return Items.Contains(book);
+        }
+
+        public int HowManyOf(object book)
+        {
+            return Items.Count(x => x.Equals(book));
         }
     }
 }
