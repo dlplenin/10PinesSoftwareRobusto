@@ -6,8 +6,16 @@ using Xunit;
 
 namespace Practivas.test.MisLibros
 {
-    public class ShoppingTest : TastFactory
+    
+    
+    public class ShoppingTest
     {
+
+        private TastFactory factory;
+
+        public ShoppingTest(){
+            this.factory = new TastFactory();
+        }
 
         private const string BOOK_NOT_IN_CATALOG = "El libro no está en el catálogo";
         private const string QUANTITY_MUST_GT_ZERO = "Cantidad debe ser mayor a 0";
@@ -15,8 +23,8 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void AgregarLibroACarrito()
         {
-            var cart = EmptyCart();
-            var book = ValidBook();
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
 
             cart.Add(book);
 
@@ -26,9 +34,9 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void AgregarMasDeUnEjemplarDeDiferentesLibrosAlCarrito()
         {
-            var cart = EmptyCart();
-            var book = ValidBook();
-            var anotherBook = AnotherValidBook();
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
+            var anotherBook = factory.AnotherValidBook();
 
             cart.AddWithQuantity(book, 3);
             cart.Add(anotherBook);
@@ -41,8 +49,8 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void AgregarMasDeUnEjemplarDelMismoLibroAlCarrito()
         {
-            var cart = EmptyCart();
-            var book = ValidBook();
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
 
             cart.AddWithQuantity(book, 3);
 
@@ -52,9 +60,9 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void AgregarMasDeUnLibroACarrito()
         {
-            var cart = EmptyCart();
-            var book = ValidBook();
-            var anotherBook = AnotherValidBook();
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
+            var anotherBook = factory.AnotherValidBook();
 
             cart.Add(book);
             cart.Add(anotherBook);
@@ -66,7 +74,7 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void ComienzoConCarritoVacio()
         {
-            var cart = EmptyCart();
+            var cart = factory.EmptyCart();
 
             Assert.True(cart.IsEmpty());
         }
@@ -74,8 +82,8 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void DebeAgregarSoloCantidadesMayoresaCero()
         {
-            var cart = EmptyCart();
-            var book = ValidBook();
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
 
             var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 0));
             Assert.Equal(QUANTITY_MUST_GT_ZERO, excepcion.Message);
@@ -84,8 +92,8 @@ namespace Practivas.test.MisLibros
         [Fact]
         public void SiAgregoLibroQueNoExisteEnCatalogo_Excepcion()
         {
-            var cart = EmptyCart();
-            var book = NotInCatalogBook();
+            var cart = factory.EmptyCart();
+            var book = factory.NotInCatalogBook();
 
             var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 1));
             Assert.Equal(BOOK_NOT_IN_CATALOG, excepcion.Message);
