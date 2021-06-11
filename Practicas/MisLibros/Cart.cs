@@ -8,9 +8,10 @@ namespace Practicas.MisLibros
     public class Cart
     {
         private List<object> Items { get; set; } = new List<object>();
-        private readonly List<object> Catalog;
+        private readonly Dictionary<string, decimal> Catalog;
 
-        public Cart(List<object> catalog)
+
+        public Cart(Dictionary<string, decimal> catalog)
         {
             Catalog = catalog;
         }
@@ -32,7 +33,7 @@ namespace Practicas.MisLibros
 
         private void AssertValidInCatalog(object book)
         {
-            if (!Catalog.Contains(book))
+            if (!Catalog.ContainsKey(book.ToString()))
                 throw new InvalidOperationException("El libro no está en el catálogo");
         }
 

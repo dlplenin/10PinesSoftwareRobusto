@@ -39,9 +39,13 @@ namespace Practicas.MisLibros
             }
         }
 
-        public void Checkout()
-        {
-            throw new InvalidOperationException("Carro esta vacio");
-        }
+        //public decimal Checkout()
+        //{
+        //    decimal total = 0;
+        //    foreach (var item in cart)
+        //    {
+
+        //    }
+        //}
     }
 }

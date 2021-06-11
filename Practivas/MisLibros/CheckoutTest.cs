@@ -21,7 +21,7 @@ namespace Practivas.test.MisLibros
         {
             Cart cart = factory.EmptyCart();
 
-            var excepcion = Assert.Throws<InvalidOperationException>(() => new Cashier(cart, "07/2050"));
+            var excepcion = Assert.Throws<InvalidOperationException>(() => new Cashier(cart, factory.ValidCreditCard()));
             Assert.Equal(CART_MUST_NOT_BE_EMPTY, excepcion.Message);
         }
 
@@ -33,7 +33,7 @@ namespace Practivas.test.MisLibros
 
             cart.Add(book);
 
-            var excepcion = Assert.Throws<InvalidOperationException>(() => new Cashier(cart, factory.ValidCreditCard()));
+            var excepcion = Assert.Throws<InvalidOperationException>(() => new Cashier(cart, factory.ExpiredCreditCard()));
             Assert.Equal(CREDIT_CARD_IS_EXPIRED, excepcion.Message);
         }
 
@@ -45,8 +45,23 @@ namespace Practivas.test.MisLibros
 
             cart.Add(book);
 
-            var excepcion = Assert.Throws<FormatException>(() => new Cashier(cart, factory.InvalidCreditCard()));
+            var excepcion = Assert.Throws<FormatException>(() => new Cashier(cart, factory.InvalidFormatCreditCard()));
             Assert.Equal(CREDIT_CARD_INVALID, excepcion.Message);
         }
+
+        //[Fact]
+        //public void CalcularTotalACobrar()
+        //{
+        //    Cart cart = factory.EmptyCart();
+        //    var book = factory.ValidBook();
+
+        //    cart.AddWithQuantity(book, 2);
+
+        //    var cashier = new Cashier(cart, factory.ValidCreditCard());
+
+        //    decimal total = cashier.Checkout();
+
+        //    Assert.Equal(20, total);
+        //}
     }
 }

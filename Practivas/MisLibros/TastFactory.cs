@@ -10,9 +10,13 @@ namespace Practivas.test.MisLibros
             return "Libro 2";
         }
 
-        public List<object> Catalog()
+        public Dictionary<string, decimal> Catalog()
         {
-            return new List<object>() { ValidBook(), AnotherValidBook() };
+            return new Dictionary<string, decimal> 
+            {
+                { ValidBook().ToString(), 15M },
+                { AnotherValidBook().ToString(), 5M }
+            };
         }
 
         public Cart EmptyCart()
@@ -30,14 +34,19 @@ namespace Practivas.test.MisLibros
             return "Libro 1";
         }
 
-        public string InvalidCreditCard()
+        public string InvalidFormatCreditCard()
         {
             return "2050/01";
         }
 
         public string ValidCreditCard()
         {
-            return "01/2021";
+            return "01/2025";
+        }
+
+        public string ExpiredCreditCard()
+        {
+            return "01/2020";
         }
     }
 }
