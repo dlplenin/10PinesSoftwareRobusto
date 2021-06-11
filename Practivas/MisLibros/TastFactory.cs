@@ -29,6 +29,15 @@ namespace Practivas.test.MisLibros
         {
             return "Libro 1";
         }
-        
+
+        public string InvalidCreditCard()
+        {
+            return "2050/01";
+        }
+
+        public string ValidCreditCard()
+        {
+            return "01/2021";
+        }
     }
 }

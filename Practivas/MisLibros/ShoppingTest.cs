@@ -1,17 +1,11 @@
-﻿using Practicas.MisLibros;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using Xunit;
 
 namespace Practivas.test.MisLibros
 {
-    
-    
     public class ShoppingTest
     {
-
-        private TastFactory factory;
+        private readonly TastFactory factory;
 
         public ShoppingTest(){
             this.factory = new TastFactory();
