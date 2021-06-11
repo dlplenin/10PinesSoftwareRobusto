@@ -6,23 +6,11 @@ using Xunit;
 
 namespace Practivas.test.MisLibros
 {
-    public class ShoppingTest
+    public class ShoppingTest : TastFactory
     {
+
         private const string BOOK_NOT_IN_CATALOG = "El libro no está en el catálogo";
         private const string QUANTITY_MUST_GT_ZERO = "Cantidad debe ser mayor a 0";
-
-        private List<object> Catalog()
-        {
-            return new List<object>() { ValidBook(), AnotherValidBook() };
-        }
-
-        [Fact]
-        public void ComienzoConCarritoVacio()
-        {
-            var cart = EmptyCart();
-
-            Assert.True(cart.IsEmpty());
-        }
 
         [Fact]
         public void AgregarLibroACarrito()
@@ -33,31 +21,6 @@ namespace Practivas.test.MisLibros
             cart.Add(book);
 
             Assert.True(cart.Contains(book));
-        }
-
-        [Fact]
-        public void AgregarMasDeUnLibroACarrito()
-        {
-            var cart = EmptyCart();
-            var book = ValidBook();
-            var anotherBook = AnotherValidBook();
-
-            cart.Add(book);
-            cart.Add(anotherBook);
-
-            Assert.True(cart.Contains(book));
-            Assert.True(cart.Contains(anotherBook));
-        }
-
-        [Fact]
-        public void AgregarMasDeUnEjemplarDelMismoLibroAlCarrito()
-        {
-            var cart = EmptyCart();
-            var book = ValidBook();
-
-            cart.AddWithQuantity(book, 3);
-
-            Assert.Equal(3, cart.HowManyOf(book));
         }
 
         [Fact]
@@ -76,13 +39,36 @@ namespace Practivas.test.MisLibros
         }
 
         [Fact]
-        public void SiAgregoLibroQueNoExisteEnCatalogo_Excepcion()
+        public void AgregarMasDeUnEjemplarDelMismoLibroAlCarrito()
         {
             var cart = EmptyCart();
-            var book = NotInCatalogBook();
+            var book = ValidBook();
 
-            var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 1));
-            Assert.Equal(BOOK_NOT_IN_CATALOG, excepcion.Message);
+            cart.AddWithQuantity(book, 3);
+
+            Assert.Equal(3, cart.HowManyOf(book));
+        }
+
+        [Fact]
+        public void AgregarMasDeUnLibroACarrito()
+        {
+            var cart = EmptyCart();
+            var book = ValidBook();
+            var anotherBook = AnotherValidBook();
+
+            cart.Add(book);
+            cart.Add(anotherBook);
+
+            Assert.True(cart.Contains(book));
+            Assert.True(cart.Contains(anotherBook));
+        }
+
+        [Fact]
+        public void ComienzoConCarritoVacio()
+        {
+            var cart = EmptyCart();
+
+            Assert.True(cart.IsEmpty());
         }
 
         [Fact]
@@ -95,24 +81,15 @@ namespace Practivas.test.MisLibros
             Assert.Equal(QUANTITY_MUST_GT_ZERO, excepcion.Message);
         }
 
-        private object NotInCatalogBook()
+        [Fact]
+        public void SiAgregoLibroQueNoExisteEnCatalogo_Excepcion()
         {
-            return "Fuera de catálogo";
+            var cart = EmptyCart();
+            var book = NotInCatalogBook();
+
+            var excepcion = Assert.Throws<InvalidOperationException>(() => cart.AddWithQuantity(book, 1));
+            Assert.Equal(BOOK_NOT_IN_CATALOG, excepcion.Message);
         }
 
-        private Cart EmptyCart()
-        {
-            return new Cart(Catalog());
-        }
-
-        private object ValidBook()
-        {
-            return "Libro 1";
-        }
-
-        private object AnotherValidBook()
-        {
-            return "Libro 2";
-        }
     }
 }
