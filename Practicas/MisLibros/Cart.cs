@@ -58,6 +58,17 @@ namespace Practicas.MisLibros
             return Items.Count(x => x.Equals(book));
         }
 
+        public decimal TotalAmount()
+        {
+            decimal total = 0;
+            foreach (var item in Items)
+            {
+                total += Catalog[item.ToString()];
+            }
+
+            return total;
+        }
+
         public int Count()
         {
             return Items.Count;

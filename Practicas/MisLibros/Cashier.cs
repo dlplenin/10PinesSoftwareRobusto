@@ -39,13 +39,9 @@ namespace Practicas.MisLibros
             }
         }
 
-        //public decimal Checkout()
-        //{
-        //    decimal total = 0;
-        //    foreach (var item in cart)
-        //    {
-
-        //    }
-        //}
+        public decimal Checkout()
+        {
+            return cart.TotalAmount();
+        }
     }
 }

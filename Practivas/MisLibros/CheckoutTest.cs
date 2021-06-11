@@ -49,19 +49,19 @@ namespace Practivas.test.MisLibros
             Assert.Equal(CREDIT_CARD_INVALID, excepcion.Message);
         }
 
-        //[Fact]
-        //public void CalcularTotalACobrar()
-        //{
-        //    Cart cart = factory.EmptyCart();
-        //    var book = factory.ValidBook();
+        [Fact]
+        public void CalcularTotalACobrar()
+        {
+            Cart cart = factory.EmptyCart();
+            var book = factory.ValidBook();
 
-        //    cart.AddWithQuantity(book, 2);
+            cart.AddWithQuantity(book, 2);
 
-        //    var cashier = new Cashier(cart, factory.ValidCreditCard());
+            var cashier = new Cashier(cart, factory.ValidCreditCard());
 
-        //    decimal total = cashier.Checkout();
+            decimal total = cashier.Checkout();
 
-        //    Assert.Equal(20, total);
-        //}
+            Assert.Equal(30, total);
+        }
     }
 }

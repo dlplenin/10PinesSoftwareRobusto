@@ -93,5 +93,16 @@ namespace Practivas.test.MisLibros
             Assert.Equal(BOOK_NOT_IN_CATALOG, excepcion.Message);
         }
 
+        [Fact]
+        public void ObtengoElTotalApagar()
+        {
+            var cart = factory.EmptyCart();
+            var book = factory.ValidBook();
+
+            cart.AddWithQuantity(book, 2);
+
+            var totalAmount = cart.TotalAmount();
+            Assert.Equal(30, totalAmount);
+        }
     }
 }
