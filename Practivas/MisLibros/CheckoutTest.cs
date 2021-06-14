@@ -75,7 +75,7 @@ namespace Practivas.test.MisLibros
 
             var cashier = new Cashier(cart, factory.ValidCreditCard(), merchantProcessor: (CheckoutInfo) => throw new Exception("No se pudo procesar"));
 
-            // Assert.Throws<Exception>(cashier.CheckOut());
+            Assert.Throws<Exception>(() => cashier.CheckOut());
 
         }
     }
