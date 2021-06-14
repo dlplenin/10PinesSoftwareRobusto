@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 
+
 namespace Practicas.MisLibros
 {
     public class Cashier
@@ -11,8 +12,9 @@ namespace Practicas.MisLibros
         private const string CREDIT_CARD_INVALID = "Tarjeta de crédito inválida";
 
         private readonly Cart cart;
+        private readonly Func<decimal, Cart> merchantProcessor;
 
-        public Cashier(Cart cart, string creditCardExpiration)
+        public Cashier(Cart cart, string creditCardExpiration, Func<decimal ,Cart> merchantProcessor)
         {
             if (cart.IsEmpty())
                 throw new InvalidOperationException(CART_MUST_NOT_BE_EMPTY);
@@ -20,6 +22,7 @@ namespace Practicas.MisLibros
             AssertValidCard(creditCardExpiration);
 
             this.cart = cart;
+            this.merchantProcessor = merchantProcessor;
         }
 
         private static void AssertValidCard(string validThru)
@@ -39,9 +42,15 @@ namespace Practicas.MisLibros
             }
         }
 
-        public decimal Checkout()
+        public decimal TotalAmount()
         {
             return cart.TotalAmount();
+        }
+
+        public bool CheckOut()
+        {
+            merchantProcessor.Invoke();
+            return false;
         }
     }
 }
