@@ -2,7 +2,7 @@
 
 namespace Practivas.test.MisLibros
 {
-    public class MerchantProcessorStub : IMerchantProcessor
+    public class MerchantProcessorStub
     {
         public MerchantProcessorStub()
         {

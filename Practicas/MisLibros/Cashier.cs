@@ -8,13 +8,13 @@ namespace Practicas.MisLibros
     public class Cashier
     {
         private const string CART_MUST_NOT_BE_EMPTY = "Carro esta vacio";
-        private const string CREDIT_CARD_IS_EXPIRED = "Tarjeta de crédito expirada";
-        private const string CREDIT_CARD_INVALID = "Tarjeta de crédito inválida";
+        private const string CREDIT_CARD_IS_EXPIRED = "Tarjeta de crï¿½dito expirada";
+        private const string CREDIT_CARD_INVALID = "Tarjeta de crï¿½dito invï¿½lida";
 
         private readonly Cart cart;
-        private readonly Func<decimal, Cart> merchantProcessor;
+        private readonly Func<CheckoutInfo, Boolean> merchantProcessor;
 
-        public Cashier(Cart cart, string creditCardExpiration, Func<decimal ,Cart> merchantProcessor)
+        public Cashier(Cart cart, string creditCardExpiration, Func<CheckoutInfo, Boolean> merchantProcessor)
         {
             if (cart.IsEmpty())
                 throw new InvalidOperationException(CART_MUST_NOT_BE_EMPTY);
@@ -49,8 +49,20 @@ namespace Practicas.MisLibros
 
         public bool CheckOut()
         {
-            merchantProcessor.Invoke();
+            merchantProcessor.Invoke(new CheckoutInfo(TotalAmount(), cart));
             return false;
+        }
+
+        public class CheckoutInfo {
+            private decimal Total;
+
+            private Cart Cart;
+
+            public CheckoutInfo(decimal total, Cart cart)
+            {
+                Total = total;
+                Cart = cart;
+            }
         }
     }
 }
