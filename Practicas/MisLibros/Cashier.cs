@@ -8,8 +8,8 @@ namespace Practicas.MisLibros
     public class Cashier
     {
         private const string CART_MUST_NOT_BE_EMPTY = "Carro esta vacio";
-        private const string CREDIT_CARD_IS_EXPIRED = "Tarjeta de cr�dito expirada";
-        private const string CREDIT_CARD_INVALID = "Tarjeta de cr�dito inv�lida";
+        private const string CREDIT_CARD_IS_EXPIRED = "Tarjeta de crédito expirada";
+        private const string CREDIT_CARD_INVALID = "Tarjeta de crédito inv�lida";
 
         private readonly Cart cart;
         private readonly Func<CheckoutInfo, Boolean> merchantProcessor;
