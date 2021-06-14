@@ -69,6 +69,13 @@ namespace Practicas.MisLibros
             return total;
         }
 
+        public Dictionary<string, int> ListItems()
+        {
+            var items = Items.GroupBy(x => x.ToString()).Select(t => new { Isbn = t.Key, BookQuantity = t.Count() }).ToList();
+
+            return items.ToDictionary(x => x.Isbn, x => x.BookQuantity);
+        }
+
         public int Count()
         {
             return Items.Count;
